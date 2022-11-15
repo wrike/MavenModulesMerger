@@ -3,27 +3,38 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>webtests</artifactId>
+        <artifactId>module1</artifactId>
         <groupId>com.wrike.webtests</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>test_pom</artifactId>
-    <groupId>groupId</groupId>
+    <artifactId>module1_child1</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.wrike.webtests</groupId>
-            <artifactId>artifact1</artifactId>
+            <artifactId>dependency2</artifactId>
         </dependency>
         <dependency>
             <groupId>com.wrike.webtests</groupId>
-            <artifactId>artifact2</artifactId>
+            <artifactId>dependency10</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.wrike.webtests</groupId>
-            <artifactId>artifact3</artifactId>
+            <artifactId>dependency11</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wrike.webtests</groupId>
+            <artifactId>module3_child1</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.wrike.webtests</groupId>
+            <artifactId>module3_child2</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
