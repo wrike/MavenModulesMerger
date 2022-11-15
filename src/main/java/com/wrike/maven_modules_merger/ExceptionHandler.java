@@ -4,14 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Author: Daniil Shylko
- * Date: 30.08.2022
- * <p>
- * It's hard to test the functionality with System.exit().
- * </p>
- * <p>
  * This class is created to be able to mock logic with System.exit().
- * </p>
+ *
+ * @author daniil.shylko on 30.08.2022
  * @see MavenModulesMerger
  */
 class ExceptionHandler {

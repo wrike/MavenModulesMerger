@@ -24,8 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 
 /**
- * Author: Daniil Shylko
- * Date: 29.08.2022
+ * @author daniil.shylko on 29.08.2022
  */
 public class MavenModulesMergerTest {
 

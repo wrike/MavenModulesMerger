@@ -1,8 +1,9 @@
 package com.wrike.maven_modules_merger.pom_parser;
 
 /**
- * Author: Daniil Shylko
- * Date: 18.08.2022
+ * The custom exception for {@link PomParser}.
+ *
+ * @author daniil.shylko on 18.08.2022
  */
 public class PomParserException extends RuntimeException {
 

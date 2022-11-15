@@ -15,8 +15,7 @@ import static com.wrike.maven_modules_merger.utils.TestFileUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Author: Daniil Shylko
- * Date: 04.08.2022
+ * @author daniil.shylko on 04.08.2022
  */
 public class PomParserTest {
 

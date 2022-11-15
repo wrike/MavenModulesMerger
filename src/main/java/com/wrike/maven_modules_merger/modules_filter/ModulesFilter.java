@@ -5,9 +5,9 @@ import com.wrike.maven_modules_merger.MavenModulesMerger;
 import java.nio.file.Path;
 
 /**
- * Author: Daniil Shylko
- * Date: 15.11.2022
  * Filter modules, which should be merged by {@link MavenModulesMerger}
+ *
+ * @author daniil.shylko on 15.11.2022
  */
 public interface ModulesFilter {
 

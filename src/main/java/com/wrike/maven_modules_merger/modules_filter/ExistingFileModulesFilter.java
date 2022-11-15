@@ -4,9 +4,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Author: Daniil Shylko
- * Date: 15.11.2022
  * Filter modules by existing file
+ *
+ * @author daniil.shylko on 15.11.2022
  */
 public class ExistingFileModulesFilter implements ModulesFilter {
 

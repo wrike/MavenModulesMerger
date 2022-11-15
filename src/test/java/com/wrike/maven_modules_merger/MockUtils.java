@@ -5,8 +5,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 
 /**
- * Author: Daniil Shylko
- * Date: 30.08.2022
+ * @author daniil.shylko on 30.08.2022
  */
 public class MockUtils {
 

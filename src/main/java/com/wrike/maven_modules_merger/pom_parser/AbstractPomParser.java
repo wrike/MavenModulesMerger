@@ -17,8 +17,9 @@ import static com.wrike.maven_modules_merger.pom_parser.bean.DependencyScope.get
 import static com.wrike.maven_modules_merger.pom_parser.utils.XmlUtils.*;
 
 /**
- * Author: Daniil Shylko
- * Date: 17.08.2022
+ * Can read and write pom file.
+ *
+ * @author daniil.shylko on 17.08.2022
  */
 public abstract class AbstractPomParser implements PomParser {
 

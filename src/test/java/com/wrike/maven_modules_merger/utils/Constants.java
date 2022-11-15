@@ -4,8 +4,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * Author: Daniil Shylko
- * Date: 30.08.2022
+ * @author daniil.shylko on 30.08.2022
  */
 public class Constants {
 

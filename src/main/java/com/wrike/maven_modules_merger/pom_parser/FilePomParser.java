@@ -13,8 +13,9 @@ import java.util.stream.Stream;
 import static com.wrike.maven_modules_merger.pom_parser.utils.XmlUtils.readXml;
 
 /**
- * Author: Daniil Shylko
- * Date: 17.08.2022
+ * Pom parser from existent file
+ *
+ * @author daniil.shylko on 17.08.2022
  */
 public class FilePomParser extends AbstractPomParser {
 

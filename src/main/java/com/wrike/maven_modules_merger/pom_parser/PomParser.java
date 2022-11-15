@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Author: Daniil Shylko
- * Date: 31.08.2022
+ * Pom parser interface, contains main methods for working with pom files.
+ *
+ * @author daniil.shylko on 31.08.2022
  */
 public interface PomParser {
 

@@ -16,39 +16,37 @@ import java.util.stream.Collectors;
 import static com.wrike.maven_modules_merger.input.MergeMode.getAllSupportedMergeModeNames;
 
 /**
- * Author: Daniil Shylko
- * Date: 26.08.2022
- * <p>
  * {@link InputParser} parses arguments for the {@link MavenModulesMerger}.
- * </p>
+ *
  * <p>
  * It receives the following arguments in the constructor in the order:
+ * </p>
  *     <ol>
  *         <li>modulesList - the list of modules, separated by comma.</li>
  *         <li>pathToProjectRoot - path to the project root.</li>
  *         <li>pathToOutputFile - path to file, where will store the modules list after merging.</li>
  *         <li>mergeMode - merge mode from {@link MergeMode#getAllSupportedMergeModeNames} set.</li>
  *     </ol>
- * </p>
  * <p>
  * After parsing the next values will be returned:
+ * </p>
  *     <ol>
  *         <li>modulesNames - set of modules names from modulesList</li>
  *         <li>pathToProjectRoot - string pathToProjectRoot from the input as {@link Path}</li>
  *         <li>pathToOutputFile - string pathToOutputFile from the input as {@link Path}</li>
  *         <li>mergeMode - {@link MergeMode} value, matched to given input</li>
  *     </ol>
- * </ol>
- * </p>
  * <p>
  * It throws an exception in the following cases:
+ * </p>
  *     <ul>
  *         <li>The number of arguments != 4</li>
  *         <li>One of arguments is null or empty</li>
  *         <li>pathToProjectRoot does not exist</li>
  *         <li>{@link MergeMode#getAllSupportedMergeModeNames} set does not contain given mergeMode</li>
  *     </ul>
- * </p>
+ *
+ * @author daniil.shylko on 26.08.2022
  * @see MavenModulesMerger
  */
 @Getter
@@ -83,6 +81,7 @@ public class InputParser {
      * Parse the list of modules, separated by comma.
      * For example, for input "module1,module2/module3,module1" it returns the next set: ["module2/module3", "module1"]
      * </p>
+     *
      * @param modulesList - list of modules, separated by comma.
      * @return set of modules names.
      */

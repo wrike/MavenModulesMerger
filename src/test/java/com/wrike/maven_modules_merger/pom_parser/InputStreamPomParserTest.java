@@ -10,8 +10,7 @@ import static com.wrike.maven_modules_merger.utils.TestFileUtils.getTempTestPomP
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Author: Daniil Shylko
- * Date: 31.08.2022
+ * @author daniil.shylko on 31.08.2022
  */
 public class InputStreamPomParserTest {
 

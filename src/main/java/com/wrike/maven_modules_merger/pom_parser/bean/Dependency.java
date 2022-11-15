@@ -8,8 +8,9 @@ import lombok.NonNull;
 import static com.wrike.maven_modules_merger.pom_parser.bean.DependencyScope.COMPILE;
 
 /**
- * Author: Daniil Shylko
- * Date: 17.08.2022
+ * Bean for storing dependency
+ *
+ * @author daniil.shylko on 17.08.2022
  */
 @Data
 @Builder

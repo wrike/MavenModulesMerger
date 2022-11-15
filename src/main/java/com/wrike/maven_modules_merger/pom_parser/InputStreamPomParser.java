@@ -5,8 +5,9 @@ import com.wrike.maven_modules_merger.pom_parser.utils.XmlUtils;
 import java.io.InputStream;
 
 /**
- * Author: Daniil Shylko
- * Date: 31.08.2022
+ * Pom parser from the input stream
+ *
+ * @author daniil.shylko on 31.08.2022
  */
 public class InputStreamPomParser extends AbstractPomParser {
 

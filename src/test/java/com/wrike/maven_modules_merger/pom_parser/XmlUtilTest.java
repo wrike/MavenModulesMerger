@@ -18,8 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * Author: Daniil Shylko
- * Date: 18.08.2022
+ * @author daniil.shylko on 18.08.2022
  */
 public class XmlUtilTest {
 

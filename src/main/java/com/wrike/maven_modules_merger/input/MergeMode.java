@@ -13,17 +13,16 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Author: Daniil Shylko
- * Date: 27.10.2022
- * <p>
  * Contains merge modes, which are supported by {@link MavenModulesMerger}.
- * </p>
+ *
  * <p>
  * {@link #SOURCES} mode is used to run merger on source code.
  * </p>
  * <p>
  * {@link #TARGET} mode is used to run merger on already compiled project.
  * </p>
+ *
+ * @author daniil.shylko on 27.10.2022
  */
 @Getter
 @AllArgsConstructor
@@ -47,7 +46,7 @@ public enum MergeMode {
     }
 
     /**
-     * @param directory name of directory
+     * @param directory      name of directory
      * @param subdirectories name of subdirectories of directory
      * @return target subdirectories path in the next format: "directory/subdirectoryName"
      */

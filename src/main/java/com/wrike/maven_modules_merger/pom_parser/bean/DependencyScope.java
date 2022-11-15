@@ -10,8 +10,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Author: Daniil Shylko
- * Date: 29.08.2022
+ * Bean for storing dependency scope for {@link Dependency}
+ *
+ * @author daniil.shylko on 29.08.2022
  */
 @Getter
 @AllArgsConstructor

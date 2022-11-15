@@ -12,8 +12,7 @@ import static com.wrike.maven_modules_merger.utils.TestProjectDirectory.TEST_PRO
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Author: Daniil Shylko
- * Date: 15.11.2022
+ * @author daniil.shylko on 15.11.2022
  */
 public class ExistingFileModulesFilterTest {
 

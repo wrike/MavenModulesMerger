@@ -1,11 +1,9 @@
 package com.wrike.maven_modules_merger;
 
 /**
- * Author: Daniil Shylko
- * Date: 26.08.2022
- * <p>
- *     Custom {@link RuntimeException} for {@link MavenModulesMerger}.
- * </p>
+ * Custom {@link RuntimeException} for {@link MavenModulesMerger}.
+ *
+ * @author daniil.shylko on 26.08.2022
  */
 public class MavenModulesMergerException extends RuntimeException {
 

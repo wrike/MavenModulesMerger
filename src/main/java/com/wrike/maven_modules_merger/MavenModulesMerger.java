@@ -30,11 +30,9 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 /**
- * Author: Daniil Shylko
- * Date: 26.08.2022
- * <p>
  * {@link MavenModulesMerger} merges given modules together and stores the result into the separate module.
- * </p>
+ *
+ * @author daniil.shylko on 26.08.2022
  */
 public class MavenModulesMerger {
 
@@ -53,6 +51,8 @@ public class MavenModulesMerger {
     private MergeMode mergeMode;
 
     /**
+     * Default constructor with {@link ModulesFilter}
+     *
      * @param modulesFilter Is used to understand which modules we should merge
      */
     public MavenModulesMerger(ModulesFilter modulesFilter) {
@@ -74,13 +74,13 @@ public class MavenModulesMerger {
      * The stateless method, which does merging for provided arguments.
      * <p>
      * It receives the following arguments in the order:
-     *     <ol>
-     *         <li>modulesList</li>
-     *         <li>pathToProjectRoot</li>
-     *         <li>pathToOutputFile</li>
-     *         <li>mergeMode</li>
-     *     </ol>
      * </p>
+     * <ol>
+     *     <li>modulesList</li>
+     *     <li>pathToProjectRoot</li>
+     *     <li>pathToOutputFile</li>
+     *     <li>mergeMode</li>
+     * </ol>
      *
      * @param args arguments list, which will be parsed by {@link InputParser}
      * @see InputParser
@@ -127,7 +127,7 @@ public class MavenModulesMerger {
     }
 
     /**
-     * Get absolute paths for modules in projects
+     * Gets absolute paths for modules in projects
      *
      * @param modules names of modules
      * @return absolute paths for modules in projects
@@ -158,8 +158,8 @@ public class MavenModulesMerger {
     }
 
     /**
-     * <p>
      * Collects all dependencies for {@link #MERGED_MODULES} modules.
+     * <p>
      * The set of dependencies is collected by this algorithm:
      * </p>
      * <ol>
@@ -274,9 +274,7 @@ public class MavenModulesMerger {
     }
 
     /**
-     * <p>
      * It copies file to new location and checks for possible conflicts.
-     * </p>
      * <p>
      * If the file already exists in the new destination and has another content it throws {@link MavenModulesMergerException}
      * </p>
@@ -315,9 +313,7 @@ public class MavenModulesMerger {
     }
 
     /**
-     * <p>
      * Returns project root related path to file.
-     * </p>
      * <p>
      * For example, for file "123.txt" and path to root "/root/" it returns "/root/123.txt" path.
      * </p>
