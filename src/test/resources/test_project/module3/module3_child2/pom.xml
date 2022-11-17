@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>module3</artifactId>
-        <groupId>com.wrike.webtests</groupId>
+        <groupId>org.company</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,22 +13,22 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>dependency1</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>dependency16</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>dependency18</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>module3_child1</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>

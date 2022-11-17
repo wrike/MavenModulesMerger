@@ -8,13 +8,13 @@ For more information, please check out the generated JavaDoc.
 You can generate JavaDoc with maven.
 
 ```shell
-mvn -P GenerateJavaDoc javadoc:javadoc
+mvn -P GenerateJavaDoc clean javadoc:javadoc
 ```
 
 After that, you can open the generated JavaDoc.
 
 ```shell
-open target/site/apidocs/index.html #open this file in browser
+open target/site/apidocs/index.html #open the JavaDoc in browser
 ```
 
 ## How to build the project

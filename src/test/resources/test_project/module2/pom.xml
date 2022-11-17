@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>webtests</artifactId>
-        <groupId>com.wrike.webtests</groupId>
+        <groupId>org.company</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,57 +13,57 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>dependency1</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>dependency3</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>dependency4</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>dependency5</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>dependency6</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>dependency7</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>dependency8</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>dependency9</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>module1_child1</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>module3_child1</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wrike.webtests</groupId>
+            <groupId>org.company</groupId>
             <artifactId>module3_child2</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
