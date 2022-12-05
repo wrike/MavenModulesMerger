@@ -33,5 +33,5 @@ mvn -P JarWithDependencies clean install
 Then you can run the jar file.
 ```shell
 cd target
-java -jar Maven_modules_merger-*-jar-with-dependencies.jar modulesList pathToProjectRoot pathToOutputFile mergeMode 
+java -jar maven_modules_merger-*-jar-with-dependencies.jar modulesList pathToProjectRoot pathToOutputFile mergeMode 
 ```
