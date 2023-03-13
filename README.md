@@ -42,5 +42,6 @@ java -jar maven_modules_merger-*-jar-with-dependencies.jar modulesList pathToPro
 Then you can run tests by modules list from the pathToOutputFile
 ```shell
 modules=$(cat pathToOutputFile) # Write new list of modules to the variable
+cd pathToProjectRoot            # Go to directory with tests
 mvn test -pl $modules           # Run tests by new list of modules
 ```
