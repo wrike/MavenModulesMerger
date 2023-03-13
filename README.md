@@ -30,8 +30,17 @@ You can create a standalone executable jar, which will contain all dependencies.
 ```shell
 mvn -P JarWithDependencies clean install
 ```
-Then you can run the jar file.
+
+## How to run tests
+
+Firstly, run the jar file.
 ```shell
 cd target
 java -jar maven_modules_merger-*-jar-with-dependencies.jar modulesList pathToProjectRoot pathToOutputFile mergeMode 
+```
+
+Then you can run tests by modules list from the pathToOutputFile
+```shell
+modules=$(cat pathToOutputFile) # Write new list of modules to the variable
+mvn test -pl $modules           # Run tests by new list of modules
 ```
