@@ -221,7 +221,8 @@ public class XmlUtilTest {
                         "modelVersion",
                         "artifactId",
                         "dependencies",
-                        "groupId"
+                        "groupId",
+                        "version"
                 );
     }
 

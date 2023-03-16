@@ -7,6 +7,7 @@ import com.wrike.merger.pom.FilePomParser;
 import com.wrike.merger.pom.InputStreamPomParser;
 import com.wrike.merger.pom.PomParser;
 import com.wrike.merger.pom.bean.Dependency;
+import com.wrike.merger.pom.bean.Parent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +43,7 @@ public class MavenModulesMerger {
     private static final String MERGED_MODULES = "merged_modules";
 
     private final ExceptionHandler exceptionHandler;
-    private final ModulesFilter modulesFilter;
+    private final List<ModulesFilter> modulesFilters;
 
     private Set<String> modulesNames;
     private Set<Path> modulesPaths;
@@ -51,23 +52,30 @@ public class MavenModulesMerger {
     private MergeMode mergeMode;
 
     /**
+     * Default constructor without filters
+     */
+    public MavenModulesMerger() {
+        this(new ExceptionHandler(), List.of());
+    }
+
+    /**
      * Default constructor with {@link ModulesFilter}
      *
-     * @param modulesFilter Is used to understand which modules we should merge
+     * @param modulesFilters Is used to understand which modules we should merge
      */
-    public MavenModulesMerger(ModulesFilter modulesFilter) {
-        this(new ExceptionHandler(), modulesFilter);
+    public MavenModulesMerger(List<ModulesFilter> modulesFilters) {
+        this(new ExceptionHandler(), modulesFilters);
     }
 
     /**
      * Package-private constructor, should be called directly only for testing purposes
      *
      * @param exceptionHandler object, which handle exceptions. Can be mocked for testing purposes
-     * @param modulesFilter    Is used to understand which modules we should merge
+     * @param modulesFilters   Is used to understand which modules we should merge
      */
-    MavenModulesMerger(ExceptionHandler exceptionHandler, ModulesFilter modulesFilter) {
+    MavenModulesMerger(ExceptionHandler exceptionHandler, List<ModulesFilter> modulesFilters) {
         this.exceptionHandler = exceptionHandler;
-        this.modulesFilter = modulesFilter;
+        this.modulesFilters = modulesFilters;
     }
 
     /**
@@ -160,8 +168,9 @@ public class MavenModulesMerger {
             });
         });
         Set<Dependency> mergedModulesDependencies = collectMergedModulesDependencies(modulesPaths);
-        createMergedModulesPomFile(mergedModulesDependencies, mergedModulesDirectory);
-        addMergedModulesToRootPom();
+        FilePomParser rootPomParser = new FilePomParser(getProjectRootRelatedPath(POM_FILENAME));
+        createMergedModulesPomFile(rootPomParser, mergedModulesDependencies, mergedModulesDirectory);
+        addMergedModulesToRootPom(rootPomParser);
     }
 
     /**
@@ -208,13 +217,19 @@ public class MavenModulesMerger {
      * Copies {@link #MERGED_MODULES_TEMPLATE_POM} to {@code mergedModulesDirectory}
      * and sets its dependencies to {@code dependencies}
      *
+     * @param rootPomParser          parser for root pom-file
      * @param dependencies           list of dependencies of {@link #MERGED_MODULES} modules
      * @param mergedModulesDirectory path to {@link #MERGED_MODULES} directory
      */
-    private void createMergedModulesPomFile(Set<Dependency> dependencies, Path mergedModulesDirectory) {
+    private void createMergedModulesPomFile(FilePomParser rootPomParser, Set<Dependency> dependencies, Path mergedModulesDirectory) {
         PomParser mergedModulesTemplatePomParser = new InputStreamPomParser(
                 getClass().getResourceAsStream(File.separator + MERGED_MODULES_TEMPLATE_POM));
         mergedModulesTemplatePomParser.setDependencies(dependencies);
+        mergedModulesTemplatePomParser.setParent(Parent.builder()
+                .groupId(rootPomParser.getGroupId())
+                .artifactId(rootPomParser.getArtifactId())
+                .version(rootPomParser.getVersion())
+                .build());
         Path mergedModulesPomPath = mergedModulesDirectory.resolve(POM_FILENAME);
         mergedModulesTemplatePomParser.writeToFile(mergedModulesPomPath);
         LOG.info("Merged modules pom was created");
@@ -222,9 +237,10 @@ public class MavenModulesMerger {
 
     /**
      * Adds the {@link #MERGED_MODULES} modules as a child modules in a root pom file
+     *
+     * @param rootPomParser parser for root pom-file
      */
-    private void addMergedModulesToRootPom() {
-        FilePomParser rootPomParser = new FilePomParser(getProjectRootRelatedPath(POM_FILENAME));
+    private void addMergedModulesToRootPom(FilePomParser rootPomParser) {
         rootPomParser.addChildModuleIfDoesNotExist(MERGED_MODULES);
         rootPomParser.writeToOriginFile();
         LOG.info("Merged module was added to root pom as a child module");
@@ -280,7 +296,7 @@ public class MavenModulesMerger {
 
     /**
      * <p>
-     * Separates all modules by the merging ability based on {@link #modulesFilter}.
+     * Separates all modules by the merging ability based on {@link #modulesFilters}.
      * </p>
      *
      * @return map of modules sets. The map has the next structure -
@@ -288,7 +304,9 @@ public class MavenModulesMerger {
      */
     private Map<Boolean, Set<Path>> separateModulesByMergingAbility() {
         return modulesPaths.stream()
-                .collect(Collectors.partitioningBy(modulesFilter::moduleMatches, Collectors.toSet()));
+                .collect(Collectors.partitioningBy(
+                        module -> modulesFilters.stream().allMatch(modulesFilter -> modulesFilter.moduleMatches(module)),
+                        Collectors.toSet()));
     }
 
     /**

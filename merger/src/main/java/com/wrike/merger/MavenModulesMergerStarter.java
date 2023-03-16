@@ -1,7 +1,5 @@
 package com.wrike.merger;
 
-import static com.wrike.merger.filter.ExistingFileModulesFilter.filterByAllureProperties;
-
 /**
  * Starts {@link MavenModulesMerger} with a given arguments.
  * <p>
@@ -13,7 +11,7 @@ import static com.wrike.merger.filter.ExistingFileModulesFilter.filterByAllurePr
 public class MavenModulesMergerStarter {
 
     public static void main(String[] args) {
-        new MavenModulesMerger(filterByAllureProperties()).merge(args);
+        new MavenModulesMerger().merge(args);
     }
 
 }

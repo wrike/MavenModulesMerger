@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.Set;
 
 import static com.wrike.merger.MockUtils.getMockedExceptionHandler;
-import static com.wrike.merger.filter.ExistingFileModulesFilter.filterByAllureProperties;
 import static com.wrike.merger.utils.Constants.*;
 import static com.wrike.merger.utils.TestFileUtils.checkMergedDirectoryContainsOnlyContentOfOtherDirectories;
 import static com.wrike.merger.utils.TestFileUtils.createTempTestDirectory;
+import static com.wrike.merger.utils.TestFilters.filterByAllureProperties;
 import static com.wrike.merger.utils.TestProjectDirectory.TEST_PROJECT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -40,7 +40,7 @@ public class MavenModulesMergerTest {
         pathToProjectRoot = createTempTestDirectory(TEST_PROJECT);
         pathToOutputFile = pathToProjectRoot.resolve(OUTPUT_FILENAME);
         mockedExceptionHandler = getMockedExceptionHandler();
-        mavenModulesMerger = new MavenModulesMerger(mockedExceptionHandler, filterByAllureProperties());
+        mavenModulesMerger = new MavenModulesMerger(mockedExceptionHandler, List.of(filterByAllureProperties()));
     }
 
     @AfterEach

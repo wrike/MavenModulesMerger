@@ -2,31 +2,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>webtests</artifactId>
-        <groupId>org.company</groupId>
+        <groupId>com.example</groupId>
+        <artifactId>example_project</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>test_pom</artifactId>
-    <groupId>groupId</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>module_3</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.company</groupId>
-            <artifactId>artifact1</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.company</groupId>
-            <artifactId>artifact2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.company</groupId>
-            <artifactId>artifact3</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>module_1</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>module_2</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

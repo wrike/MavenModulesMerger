@@ -2,6 +2,7 @@ package com.wrike.merger.pom;
 
 import com.wrike.merger.pom.bean.Dependency;
 import com.wrike.merger.pom.bean.Dependency.DependencyBuilder;
+import com.wrike.merger.pom.bean.Parent;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -30,6 +31,7 @@ public abstract class AbstractPomParser implements PomParser {
     private static final String PARENT_GROUP_ID_PATH = PARENT_PATH + "/groupId";
     private static final String DEPENDENCIES_PATH = PROJECT_PATH + "/dependencies";
     private static final String ARTIFACT_ID_PATH = PROJECT_PATH + "/artifactId";
+    private static final String VERSION_PATH = PROJECT_PATH + "/version";
     private static final String GROUP_ID_PATH = PROJECT_PATH + "/groupId";
     private static final String DEPENDENCY_PATH = DEPENDENCIES_PATH + "/dependency";
     private static final String DEPENDENCY_BY_GROUP_AND_ARTIFACT_ID_PATH =
@@ -42,7 +44,7 @@ public abstract class AbstractPomParser implements PomParser {
 
     private final Document document;
 
-    public AbstractPomParser(Document document) {
+    protected AbstractPomParser(Document document) {
         this.document = document;
     }
 
@@ -96,6 +98,11 @@ public abstract class AbstractPomParser implements PomParser {
     }
 
     @Override
+    public String getVersion() {
+        return getNodeByXPathTextContent(document, VERSION_PATH);
+    }
+
+    @Override
     public String getGroupId() {
         return getNodeByXPathTextContent(document, GROUP_ID_PATH);
     }
@@ -130,6 +137,14 @@ public abstract class AbstractPomParser implements PomParser {
     }
 
     @Override
+    public void setParent(Parent parent) {
+        if (getNodeByXPath(document, PARENT_PATH) != null) {
+            removeNodesByXPath(document, PARENT_PATH);
+        }
+        getProjectNode().appendChild(convertParentToXMLElement(parent));
+    }
+
+    @Override
     public void writeToFile(Path filePath) {
         writePrettifiedXml(document, filePath);
     }
@@ -138,11 +153,11 @@ public abstract class AbstractPomParser implements PomParser {
         Element dependencyNode = document.createElement("dependency");
         Element groupId = document.createElement("groupId");
         groupId.appendChild(document.createTextNode(dependency.getGroupId()));
-        Element artifactIdElement = document.createElement("artifactId");
-        artifactIdElement.appendChild(document.createTextNode(dependency.getArtifactId()));
+        Element artifactId = document.createElement("artifactId");
+        artifactId.appendChild(document.createTextNode(dependency.getArtifactId()));
         dependencyNode.appendChild(document.createComment(ADDED_AUTOMATICALLY));
         dependencyNode.appendChild(groupId);
-        dependencyNode.appendChild(artifactIdElement);
+        dependencyNode.appendChild(artifactId);
         if (dependency.getVersion() != null) {
             Element version = document.createElement("version");
             version.appendChild(document.createTextNode(dependency.getVersion()));
@@ -155,6 +170,20 @@ public abstract class AbstractPomParser implements PomParser {
             dependencyNode.appendChild(scope);
         }
         return dependencyNode;
+    }
+
+    private Element convertParentToXMLElement(Parent parent) {
+        Element parentNode = document.createElement("parent");
+        Element groupId = document.createElement("groupId");
+        groupId.appendChild(document.createTextNode(parent.getGroupId()));
+        Element artifactId = document.createElement("artifactId");
+        artifactId.appendChild(document.createTextNode(parent.getArtifactId()));
+        Element version = document.createElement("version");
+        version.appendChild(document.createTextNode(parent.getVersion()));
+        parentNode.appendChild(groupId);
+        parentNode.appendChild(artifactId);
+        parentNode.appendChild(version);
+        return parentNode;
     }
 
     private Element createDependenciesNode() {

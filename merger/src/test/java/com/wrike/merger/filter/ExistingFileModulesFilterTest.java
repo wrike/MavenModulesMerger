@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 
-import static com.wrike.merger.filter.ExistingFileModulesFilter.filterByAllureProperties;
 import static com.wrike.merger.utils.Constants.MODULE_WITHOUT_ALLURE_PROPERTIES;
 import static com.wrike.merger.utils.TestFileUtils.createTempTestDirectory;
+import static com.wrike.merger.utils.TestFilters.filterByAllureProperties;
 import static com.wrike.merger.utils.TestProjectDirectory.TEST_PROJECT;
 import static org.assertj.core.api.Assertions.assertThat;
 

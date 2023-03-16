@@ -21,7 +21,4 @@ public class ExistingFileModulesFilter implements ModulesFilter {
         return Files.exists(modulePath.resolve(relativeFilePath));
     }
 
-    public static ExistingFileModulesFilter filterByAllureProperties() {
-        return new ExistingFileModulesFilter(Path.of("src/test/resources/allure.properties"));
-    }
 }

@@ -1,6 +1,7 @@
 package com.wrike.merger.pom;
 
 import com.wrike.merger.pom.bean.Dependency;
+import com.wrike.merger.pom.bean.Parent;
 import org.w3c.dom.Node;
 
 import java.nio.file.Path;
@@ -32,6 +33,8 @@ public interface PomParser {
 
     String getGroupId();
 
+    String getVersion();
+
     String getParentGroupId();
 
     String getEffectiveGroupId();
@@ -39,6 +42,8 @@ public interface PomParser {
     void addChildModuleIfDoesNotExist(String moduleName);
 
     Set<String> getChildrenModules();
+
+    void setParent(Parent parent);
 
     void writeToFile(Path filePath);
 

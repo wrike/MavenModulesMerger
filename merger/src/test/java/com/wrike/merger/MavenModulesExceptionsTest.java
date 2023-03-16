@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import static com.wrike.merger.ExitCode.MERGING_FAILED;
 import static com.wrike.merger.MockUtils.getMockedExceptionHandler;
-import static com.wrike.merger.filter.ExistingFileModulesFilter.filterByAllureProperties;
 import static com.wrike.merger.utils.Constants.*;
 import static com.wrike.merger.utils.TestFileUtils.createTempTestDirectory;
 import static com.wrike.merger.utils.TestProjectDirectory.TEST_PROJECT_WITH_BROKEN_TARGET;
@@ -23,7 +23,7 @@ public class MavenModulesExceptionsTest {
     @Test
     void checkInputParserExceptionIsCaught() {
         ExceptionHandler mockedExceptionHandler = getMockedExceptionHandler();
-        MavenModulesMerger mavenModulesMerger = new MavenModulesMerger(mockedExceptionHandler, filterByAllureProperties());
+        MavenModulesMerger mavenModulesMerger = new MavenModulesMerger(mockedExceptionHandler, List.of());
 
         mavenModulesMerger.merge(MODULE_3_CHILD_1);
 
@@ -36,7 +36,7 @@ public class MavenModulesExceptionsTest {
     @Test
     void checkExceptionIsLoggedOnce() {
         ExceptionHandler mockedExceptionHandler = getMockedExceptionHandler();
-        MavenModulesMerger mavenModulesMerger = new MavenModulesMerger(mockedExceptionHandler, filterByAllureProperties());
+        MavenModulesMerger mavenModulesMerger = new MavenModulesMerger(mockedExceptionHandler, List.of());
 
         mavenModulesMerger.merge(MODULE_3_CHILD_1);
 
@@ -49,7 +49,7 @@ public class MavenModulesExceptionsTest {
         Path pathToProjectRoot = createTempTestDirectory(TEST_PROJECT_WITH_CONFLICT);
         Path pathToOutputFile = pathToProjectRoot.resolve(OUTPUT_FILENAME);
         ExceptionHandler mockedExceptionHandler = getMockedExceptionHandler();
-        MavenModulesMerger mavenModulesMerger = new MavenModulesMerger(mockedExceptionHandler, filterByAllureProperties());
+        MavenModulesMerger mavenModulesMerger = new MavenModulesMerger(mockedExceptionHandler, List.of());
 
         mavenModulesMerger.merge("module1/module1_child1,module1/module1_child2", pathToProjectRoot.toString(), pathToOutputFile.toString(), SOURCE_MODE);
 
@@ -62,7 +62,7 @@ public class MavenModulesExceptionsTest {
         Path pathToProjectRoot = createTempTestDirectory(TEST_PROJECT_WITH_BROKEN_TARGET);
         Path pathToOutputFile = pathToProjectRoot.resolve(OUTPUT_FILENAME);
         ExceptionHandler mockedExceptionHandler = getMockedExceptionHandler();
-        MavenModulesMerger mavenModulesMerger = new MavenModulesMerger(mockedExceptionHandler, filterByAllureProperties());
+        MavenModulesMerger mavenModulesMerger = new MavenModulesMerger(mockedExceptionHandler, List.of());
 
         mavenModulesMerger.merge("module1/module1_child1,module2/module2_child1", pathToProjectRoot.toString(), pathToOutputFile.toString(), TARGET_MODE);
 
