@@ -226,7 +226,7 @@ public class MavenModulesMerger {
                 getClass().getResourceAsStream(File.separator + MERGED_MODULES_TEMPLATE_POM));
         mergedModulesTemplatePomParser.setDependencies(dependencies);
         mergedModulesTemplatePomParser.setParent(Parent.builder()
-                .groupId(rootPomParser.getGroupId())
+                .groupId(rootPomParser.getEffectiveGroupId())
                 .artifactId(rootPomParser.getArtifactId())
                 .version(rootPomParser.getVersion())
                 .build());

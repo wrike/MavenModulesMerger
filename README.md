@@ -57,7 +57,7 @@ To merge all modules in the example_project, run the following command:
 ```shell
 cd merger/target
 java -jar merger-*-jar-with-dependencies.jar \
-    module_1,module_2,module_3,module_4,module_5 \
+    wrike_avatar,wrike_button,wrike_task_view,wrike_tooltip \
     ../../example_project \
     ../../example_project/target/modulesList.txt \
     sources
@@ -68,8 +68,11 @@ You can inspect created files in `example_project/merged_modules` directory and 
 Compare the speed of tests with the following commands:
 ```shell
 cd example_project
-mvn test -pl module_1,module_2,module_3,module_4,module_5 # running all tests without modules parallelism
-mvn test -pl module_1,module_2,module_3,module_4,module_5 -T 5 # running all tests with modules parallelism
+mvn test -pl wrike_avatar,wrike_button,wrike_task_view,wrike_tooltip # running all tests without modules parallelism
+mvn test -pl wrike_avatar,wrike_button,wrike_task_view,wrike_tooltip -T 5 # running all tests with modules parallelism
 mvn test -pl merged_modules # running all tests after merging
 ```
-Modules 3,4,5 have dependencies on other modules, so parallelism (`-T 5`) will not help a lot, but after merging all tests will be run in parallel fast.
+Some modules have dependencies on other modules, so parallelism (`-T 5`) will not help a lot, but after merging all tests will be run in parallel fast.
+
+Using unique names of directories in `src/test/java/resources` folders and unique package names guarantee
+that we won't have conflicts between files during merging.

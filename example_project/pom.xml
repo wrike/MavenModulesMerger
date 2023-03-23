@@ -10,17 +10,15 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.example</groupId>
     <artifactId>example_project</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>module_1</module>
-        <module>module_2</module>
-        <module>module_3</module>
-        <module>module_4</module>
-        <module>module_5</module>
+        <module>wrike_task_view</module>
+        <module>wrike_button</module>
+        <module>wrike_tooltip</module>
+        <module>wrike_avatar</module>
     </modules>
 
     <dependencyManagement>
