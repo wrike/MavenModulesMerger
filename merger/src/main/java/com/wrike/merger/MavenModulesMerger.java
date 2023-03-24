@@ -16,11 +16,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -194,14 +193,13 @@ public class MavenModulesMerger {
                 .map(modulePath -> modulePath.resolve(POM_FILENAME))
                 .map(FilePomParser::new)
                 .collect(Collectors.toList());
-        Set<Dependency> modulesDependencies = modulePomParsers.stream()
+        Map<Dependency, List<Dependency>> modulesDependenciesMap = modulePomParsers.stream()
                 .map(PomParser::getAllDependencies)
                 .flatMap(Collection::stream)
-                .peek(dependency -> dependency.setScope(COMPILE))
-                .collect(Collectors.toCollection(() -> new TreeSet<>(
-                        Comparator.comparing(Dependency::getGroupId)
-                                .thenComparing(Dependency::getArtifactId)
-                )));
+                .collect(Collectors.groupingBy(Function.identity()));
+        checkAllDependenciesHaveTheSameVersion(modulesDependenciesMap);
+        Set<Dependency> modulesDependencies = modulesDependenciesMap.keySet();
+        modulesDependencies.forEach(dependency -> dependency.setScope(COMPILE));
         Set<Dependency> dependenciesToExclude = modulePomParsers.stream()
                 .map(pomParser -> Dependency.builder()
                         .groupId(pomParser.getEffectiveGroupId())
@@ -211,6 +209,19 @@ public class MavenModulesMerger {
                 .collect(Collectors.toSet());
         modulesDependencies.removeAll(dependenciesToExclude);
         return modulesDependencies;
+    }
+
+    /**
+     * Checks that all dependencies with the same groupId and artifactId have the same version
+     *
+     * @param modulesDependenciesMap dependencies grouped by artifactId and groupId
+     */
+    private static void checkAllDependenciesHaveTheSameVersion(Map<Dependency, List<Dependency>> modulesDependenciesMap) {
+        modulesDependenciesMap.values().forEach(dependencies -> {
+            if (dependencies.stream().map(Dependency::getVersion).distinct().count() != 1L) {
+                throw new MavenModulesMergerException(String.format("Dependencies have different versions: %s", dependencies));
+            }
+        });
     }
 
     /**

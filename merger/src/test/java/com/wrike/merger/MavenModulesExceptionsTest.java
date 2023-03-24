@@ -5,6 +5,7 @@ import org.mockito.Mockito;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 
 import static com.wrike.merger.ExitCode.MERGING_FAILED;
 import static com.wrike.merger.MockUtils.getMockedExceptionHandler;
@@ -55,6 +56,25 @@ public class MavenModulesExceptionsTest {
 
         Mockito.verify(mockedExceptionHandler).onException(argThat(e ->
                 "Unable to merge files due to conflict in files content.".equals(e.getMessage())), any());
+    }
+
+    @Test
+    void checkExceptionForSameDependencyWithDifferentVersions() {
+        Path pathToProjectRoot = createTempTestDirectory(TEST_PROJECT_WITH_CONFLICT);
+        Path pathToOutputFile = pathToProjectRoot.resolve(OUTPUT_FILENAME);
+        ExceptionHandler mockedExceptionHandler = getMockedExceptionHandler();
+        MavenModulesMerger mavenModulesMerger = new MavenModulesMerger(mockedExceptionHandler, List.of());
+
+        mavenModulesMerger.merge("module1/module1_child2,module1/module1_child3", pathToProjectRoot.toString(), pathToOutputFile.toString(), SOURCE_MODE);
+
+        Set<String> possibleErrorMessages = Set.of(
+                "Dependencies have different versions: [Dependency(groupId=test_groupId, artifactId=test_artifactId, version=1, scope=COMPILE)," +
+                        " Dependency(groupId=test_groupId, artifactId=test_artifactId, version=2, scope=COMPILE)]",
+                "Dependencies have different versions: [Dependency(groupId=test_groupId, artifactId=test_artifactId, version=2, scope=COMPILE)," +
+                        " Dependency(groupId=test_groupId, artifactId=test_artifactId, version=1, scope=COMPILE)]"
+        );
+
+        Mockito.verify(mockedExceptionHandler).onException(argThat(e -> possibleErrorMessages.contains(e.getMessage())), any());
     }
 
     @Test
